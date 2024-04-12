@@ -1,20 +1,17 @@
-len_cal:
-	push ebx
-	mov ebx, eax
+section .text
+	global main
 
-next_char:
-	cmp byte [eax], 0
-	jz end_loop
-	inc eax
-	jmp next_char
-	
-end_lo:
-	
+printMsg:
+	mov ecx, msg
+	mov edx, msg_len
+	mov eax, 4
+	mov ebx, 1
+	int 0x80
+	ret
 
+main:
+	call printMsg
 
-print:
-	push edx
-	push ecx
-	push ebx
-	push eax
-	call len_cal
+section .data
+	msg db "Hello world!", 10
+	msg_len equ $-msg
